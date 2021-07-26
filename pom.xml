@@ -21,6 +21,13 @@
             <version>3.141.59</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide</artifactId>
+            <version>5.23.0</version>
+            <scope>test</scope>
+        </dependency>
+
         <!--JUNIT4-->
         <dependency>
             <groupId>junit</groupId>
