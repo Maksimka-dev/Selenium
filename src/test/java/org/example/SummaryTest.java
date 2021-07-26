@@ -5,11 +5,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import utils.Driver;
 import utils.Log;
 
-import java.util.concurrent.TimeUnit;
 
 public class SummaryTest {
     public static WebDriver driver;
