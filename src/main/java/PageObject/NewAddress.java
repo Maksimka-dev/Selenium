@@ -1,13 +1,15 @@
-package org.example;
+package PageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import utils.ConfProperties;
 
-public class EditAddress {
+public class NewAddress {
+
     private WebDriver driver;
-    private WebElement markerEditAddressPage;
+    private WebElement markerNewAddressPage;
     private WebElement firstNameField;
     private WebElement lastNameField;
     private WebElement address1Field;
@@ -25,13 +27,13 @@ public class EditAddress {
     private WebElement interestsReadCheckBox;
     private WebElement interestsDanceCheckBox;
     private WebElement noteFiled;
-    private WebElement updateAddressBtn;
+    private WebElement createAddressBtn;
 
-    public EditAddress (WebDriver driver){
+    public NewAddress (WebDriver driver){
         this.driver = driver;
     }
 
-    public void initFieldCreateAddressPage(){
+    public void initFieldNewAddressPage(){
         firstNameField = driver.findElement(By.xpath("//input[@id='address_first_name']"));
         lastNameField = driver.findElement(By.xpath("//input[@id='address_last_name']"));
         address1Field = driver.findElement(By.xpath("//input[@id='address_street_address']"));
@@ -49,8 +51,8 @@ public class EditAddress {
         interestsDanceCheckBox = driver.findElement(By.xpath("//input[@id='address_interest_dance']"));
         interestsReadCheckBox = driver.findElement(By.xpath("//input[@id='address_interest_read']"));
         noteFiled = driver.findElement(By.xpath("//textarea[@id='address_note']"));
-        updateAddressBtn = driver.findElement(By.xpath("//input[@data-test='submit']"));
-        markerEditAddressPage = driver.findElement(By.xpath("//div[@class='container']/h2"));
+        createAddressBtn = driver.findElement(By.xpath("//input[@data-test='submit']"));
+        markerNewAddressPage = driver.findElement(By.xpath("//div[@class='container']/h2"));
     }
 
     public void clickCountryUSRadioBtn() { countryUSRadioBtn.click(); }
@@ -75,25 +77,15 @@ public class EditAddress {
 
     public void setFirstNameField(String firstName) { firstNameField.sendKeys(firstName); }
 
-    public void clearFirstNameField(){ firstNameField.clear(); }
-
     public void setLastNameField(String lastName) { lastNameField.sendKeys(lastName); }
-
-    public void clearLastNameField() { lastNameField.clear(); }
 
     public void setAddress1Field(String address1) { address1Field.sendKeys(address1); }
 
-    public void clearAddress1Field() { address1Field.clear(); }
-
     public void setAddress2Field(String address2) { address2Field.sendKeys(address2); }
-
-    public void clearAddress2Field() { address2Field.clear(); }
 
     public void setCityField(String city) { cityField.sendKeys(city); }
 
-    public void clearCityField() { cityField.clear(); }
-
-    public void clickUpdateAddressBtn(){ updateAddressBtn.click(); }
+    public void clickCreateAddressBtn(){ createAddressBtn.click(); }
 
     public void setStateSelect(String value) {
         Select select = new Select(stateSelect);
@@ -102,10 +94,10 @@ public class EditAddress {
 
     public void setZipCodeField(String zipCode) { zipCodeField.sendKeys(zipCode); }
 
-    public boolean isEditAddressPage(){
+    public boolean isNewAddressPage(){
         boolean result = false;
 
-        if(markerEditAddressPage.getText().equals(ConfProperties.getProperty("edit_address_page_marker"))){
+        if(markerNewAddressPage.getText().equals(ConfProperties.getProperty("new_address_page_marker"))){
             result = true;
         }
 

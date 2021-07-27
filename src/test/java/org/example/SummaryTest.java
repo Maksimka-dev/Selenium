@@ -1,19 +1,18 @@
 package org.example;
 
-import com.codeborne.selenide.Config;
+import PageObject.*;
 import com.codeborne.selenide.Configuration;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.Condition.*;
-import static org.junit.Assert.*;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-//import utils.Driver;
-import utils.Log;
+import static org.junit.Assert.assertTrue;
 
-import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.WebDriver;
+import utils.ConfProperties;
+import utils.Log;
+//import utils.Driver;
+
 
 public class SummaryTest {
     public static WebDriver driver;
@@ -27,13 +26,13 @@ public class SummaryTest {
 
     @BeforeClass
     public static void setup() {
-
-        open("http://a.testaddressbook.com/sign_in");
+        Configuration.baseUrl = "http://a.testaddressbook.com/sign_in";
+        open(Configuration.baseUrl);
 //        driver = Driver.getChromeDriver();
 //        driver.get(ConfProperties.getProperty("sign_in_page"));
-//        signInPage = new SignInPage(driver);
+        signInPage = new SignInPage();
 //        welcomePage = new WelcomePage(driver);
-//        addressesPage = new AddressesPage(driver);
+        addressesPage = new AddressesPage();
 //        newAddressPage = new NewAddress(driver);
 //        createSuccessAddressPage = new CreateSuccessAddress(driver);
 //        editAddressPage = new EditAddress(driver);
@@ -42,15 +41,14 @@ public class SummaryTest {
 
     @Test
     public void summaryTest(){
-//        Log.info("Начало теста");
-//        signInPage.initFieldsSignInPage();
-//        assertTrue(signInPage.isSignInPage());
-//
-//
-//
-//        signInPage.setEmailField(ConfProperties.getProperty("email"));
-//        signInPage.setPassField(ConfProperties.getProperty("password"));
-//        signInPage.clickSignInBtn();
+        Log.info("Начало теста");
+        assertTrue(signInPage.isSignInPage());
+
+
+
+        signInPage.setEmailField(ConfProperties.getProperty("email"));
+        signInPage.setPassField(ConfProperties.getProperty("password"));
+        signInPage.clickSignInBtn();
 //
 //
 //        welcomePage.initFieldsWelcomePage();

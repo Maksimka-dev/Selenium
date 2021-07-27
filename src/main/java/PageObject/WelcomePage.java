@@ -1,8 +1,9 @@
-package org.example;
+package PageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import utils.ConfProperties;
 
 public class WelcomePage {
 
