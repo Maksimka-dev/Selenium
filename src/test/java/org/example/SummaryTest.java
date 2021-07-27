@@ -1,12 +1,16 @@
 package org.example;
 
+import com.codeborne.selenide.Config;
+import com.codeborne.selenide.Configuration;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Condition.*;
 import static org.junit.Assert.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import utils.Driver;
+//import utils.Driver;
 import utils.Log;
 
 import java.util.concurrent.TimeUnit;
@@ -23,6 +27,8 @@ public class SummaryTest {
 
     @BeforeClass
     public static void setup() {
+
+        open("http://a.testaddressbook.com/sign_in");
 //        driver = Driver.getChromeDriver();
 //        driver.get(ConfProperties.getProperty("sign_in_page"));
 //        signInPage = new SignInPage(driver);
