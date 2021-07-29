@@ -1,7 +1,6 @@
 package PageObject;
 
 import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.By;
 import utils.ConfProperties;
 
 import static com.codeborne.selenide.Condition.text;

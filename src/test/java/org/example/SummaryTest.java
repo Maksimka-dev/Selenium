@@ -13,7 +13,6 @@ import static org.junit.Assert.assertTrue;
 import org.openqa.selenium.WebDriver;
 import utils.ConfProperties;
 import utils.Log;
-//import utils.Driver;
 
 
 public class SummaryTest {
