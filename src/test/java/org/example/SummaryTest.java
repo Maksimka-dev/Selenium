@@ -4,33 +4,29 @@ import PageElement.TopMenu;
 import PageObject.*;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
+import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.Assert.assertTrue;
-
-import org.openqa.selenium.WebDriver;
 import utils.ConfProperties;
 import utils.Log;
 
 
 public class SummaryTest {
 
-    public static WebDriver driver;
     public static SignInPage signInPage;
     public static TopMenu topMenu;
     public static HomePage homePage;
     public static AddressesPage addressesPage;
     public static NewEditAddressPage newEditAddressPage;
     public static ShowAddressPage showAddressPage;
-    public static NewEditAddressPage editCreateAddressPage;
 
     @BeforeClass
     public static void setup() {
         Configuration.baseUrl = "http://a.testaddressbook.com/sign_in";
         open(Configuration.baseUrl);
-        driver = WebDriverRunner.getWebDriver();
         signInPage = new SignInPage();
         topMenu = new TopMenu();
         homePage = new HomePage();
@@ -38,6 +34,7 @@ public class SummaryTest {
         newEditAddressPage = new NewEditAddressPage();
         showAddressPage = new ShowAddressPage();
     }
+
     @AfterClass
     public static void tearDown(){
         topMenu.clickSignOutBtn();
@@ -46,15 +43,68 @@ public class SummaryTest {
     }
 
     @Test
-    public void summaryTest(){
-        Log.info("Начало теста");
+    public void signInTest(){
+        Log.info("Начало логина");
         assertTrue(signInPage.isSignInPage());
-
 
         signInPage.setEmailField(ConfProperties.getProperty("email"));
         signInPage.setPassField(ConfProperties.getProperty("password"));
         signInPage.clickSignInBtn();
 
+        assertTrue(homePage.isHomePage());
+        Log.info("Вход в аккаунт выполнен");
+    }
+
+    @Test
+    public void addAddress(){
+        Log.info("Начало логина");
+        assertTrue(signInPage.isSignInPage());
+
+        signInPage.setEmailField(ConfProperties.getProperty("email"));
+        signInPage.setPassField(ConfProperties.getProperty("password"));
+        signInPage.clickSignInBtn();
+
+        assertTrue(homePage.isHomePage());
+        Log.info("Вход в аккаунт выполнен");
+
+        topMenu.clickAddressBtn();
+
+        assertTrue(addressesPage.isAddressesPage());
+        Log.info("Переход на страницу с таблицей адресов выполнен");
+
+        addressesPage.clickNewAddressBtn();
+
+        assertTrue(newEditAddressPage.isNewAddressPage());
+        Log.info("Переход на страницу создания нового адреса выполнен");
+
+        newEditAddressPage.setFirstNameField(ConfProperties.getProperty("firstNameNewAddress"));
+        newEditAddressPage.setLastNameField(ConfProperties.getProperty("lastNameNewAddress"));
+        newEditAddressPage.setAddress1Field(ConfProperties.getProperty("address1NewAddress"));
+        newEditAddressPage.setAddress2Field(ConfProperties.getProperty("address2NewAddress"));
+        newEditAddressPage.setCityField(ConfProperties.getProperty("cityNewAddress"));
+        newEditAddressPage.setStateSelect(ConfProperties.getProperty("stateValueNewAddress"));
+        newEditAddressPage.setZipCodeField(ConfProperties.getProperty("zipCodeNewAddress"));
+        newEditAddressPage.clickCountryUSRadioBtn();
+        newEditAddressPage.setBirthdayCalendar(ConfProperties.getProperty("birthdayCalendarNewAddress"));
+        newEditAddressPage.setAgeField(ConfProperties.getProperty("ageNewAddress"));
+        newEditAddressPage.setWebsiteField(ConfProperties.getProperty("websiteNewAddress"));
+        newEditAddressPage.setPhoneField(ConfProperties.getProperty("phoneNewAddress"));
+        newEditAddressPage.clickInterestsDanceCheckBox();
+        newEditAddressPage.setNoteFiled(ConfProperties.getProperty("noteNewAddress"));
+        newEditAddressPage.clickSubmitAddressBtn();
+
+        assertTrue(showAddressPage.isCreateSuccessAddressPage());
+        Log.info("Создание нового адреса выполнено");
+    }
+
+    @Test
+    public void editAddress(){
+        Log.info("Начало логина");
+        assertTrue(signInPage.isSignInPage());
+
+        signInPage.setEmailField(ConfProperties.getProperty("email"));
+        signInPage.setPassField(ConfProperties.getProperty("password"));
+        signInPage.clickSignInBtn();
 
         assertTrue(homePage.isHomePage());
         Log.info("Вход в аккаунт выполнен");
@@ -114,7 +164,48 @@ public class SummaryTest {
 
         assertTrue(showAddressPage.isUpdateSuccessAddressPage());
         Log.info("Редактирование адреса выполнено");
-        Log.info("Переход на страницу предварительного просмотра отредактированного адреса выполнен");
+    }
+
+    @Test
+    public void destroyAddress(){
+        Log.info("Начало логина");
+        assertTrue(signInPage.isSignInPage());
+
+        signInPage.setEmailField(ConfProperties.getProperty("email"));
+        signInPage.setPassField(ConfProperties.getProperty("password"));
+        signInPage.clickSignInBtn();
+
+        assertTrue(homePage.isHomePage());
+        Log.info("Вход в аккаунт выполнен");
+
+        topMenu.clickAddressBtn();
+
+        assertTrue(addressesPage.isAddressesPage());
+        Log.info("Переход на страницу с таблицей адресов выполнен");
+
+        addressesPage.clickNewAddressBtn();
+
+        assertTrue(newEditAddressPage.isNewAddressPage());
+        Log.info("Переход на страницу создания нового адреса выполнен");
+
+        newEditAddressPage.setFirstNameField(ConfProperties.getProperty("firstNameNewAddress"));
+        newEditAddressPage.setLastNameField(ConfProperties.getProperty("lastNameNewAddress"));
+        newEditAddressPage.setAddress1Field(ConfProperties.getProperty("address1NewAddress"));
+        newEditAddressPage.setAddress2Field(ConfProperties.getProperty("address2NewAddress"));
+        newEditAddressPage.setCityField(ConfProperties.getProperty("cityNewAddress"));
+        newEditAddressPage.setStateSelect(ConfProperties.getProperty("stateValueNewAddress"));
+        newEditAddressPage.setZipCodeField(ConfProperties.getProperty("zipCodeNewAddress"));
+        newEditAddressPage.clickCountryUSRadioBtn();
+        newEditAddressPage.setBirthdayCalendar(ConfProperties.getProperty("birthdayCalendarNewAddress"));
+        newEditAddressPage.setAgeField(ConfProperties.getProperty("ageNewAddress"));
+        newEditAddressPage.setWebsiteField(ConfProperties.getProperty("websiteNewAddress"));
+        newEditAddressPage.setPhoneField(ConfProperties.getProperty("phoneNewAddress"));
+        newEditAddressPage.clickInterestsDanceCheckBox();
+        newEditAddressPage.setNoteFiled(ConfProperties.getProperty("noteNewAddress"));
+        newEditAddressPage.clickSubmitAddressBtn();
+
+        assertTrue(showAddressPage.isCreateSuccessAddressPage());
+        Log.info("Создание нового адреса выполнено");
 
         topMenu.clickAddressBtn();
 
@@ -124,9 +215,9 @@ public class SummaryTest {
 
         addressesPage.clickDestroyLastEntryAddressBtn();
 
-        driver.switchTo().alert().accept();
+        switchTo().alert().accept();
         assertTrue(addressesPage.isAddressDestroy());
         Log.info("Удаление записи в талице адресов выполнено");
-
     }
+
 }

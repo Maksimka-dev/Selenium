@@ -12,8 +12,8 @@ public class AddressesPage {
     private SelenideElement newAddressBtn = $(byXpath("//a[@data-test='create']"));
     private SelenideElement markerAddressesPage = $(byXpath("//div[@class='container']/h2"));
     private SelenideElement markerDestroyAddress = $(byXpath("//div[@data-test='notice']"));
-    private SelenideElement editLastEntryAddress = $(byXpath("//tbody/tr[last()]/td[6]/a"));
-    private SelenideElement destroyLastEntryAddress = $(byXpath("//tbody/tr[last()]/td[7]/a"));
+    private SelenideElement editLastEntryAddress = $(byXpath("//tr[last()]//a[text()='Edit']"));
+    private SelenideElement destroyLastEntryAddress = $(byXpath("//tr[last()]//a[text()='Destroy']"));
 
     public void clickNewAddressBtn(){ newAddressBtn.click(); }
 
