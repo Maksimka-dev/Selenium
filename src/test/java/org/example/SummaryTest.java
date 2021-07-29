@@ -1,7 +1,11 @@
 package org.example;
 
+import PageElement.TopMenu;
 import PageObject.*;
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Driver;
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.WebDriverRunner;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -15,28 +19,33 @@ import utils.Log;
 
 
 public class SummaryTest {
+
     public static WebDriver driver;
     public static SignInPage signInPage;
-    public static WelcomePage welcomePage;
+    public static TopMenu topMenu;
+    public static HomePage homePage;
     public static AddressesPage addressesPage;
-    public static NewAddress newAddressPage;
-    public static CreateSuccessAddress createSuccessAddressPage;
-    public static EditAddress editAddressPage;
-    public static UpdateSuccessAddress updateSuccessAddressPage;
+    public static NewEditAddress newEditAddressPage;
+    public static ShowAddress showAddressPage;
+    public static NewEditAddress editCreateAddressPage;
 
     @BeforeClass
     public static void setup() {
         Configuration.baseUrl = "http://a.testaddressbook.com/sign_in";
         open(Configuration.baseUrl);
-//        driver = Driver.getChromeDriver();
-//        driver.get(ConfProperties.getProperty("sign_in_page"));
+        driver = WebDriverRunner.getWebDriver();
         signInPage = new SignInPage();
-//        welcomePage = new WelcomePage(driver);
+        topMenu = new TopMenu();
+        homePage = new HomePage();
         addressesPage = new AddressesPage();
-//        newAddressPage = new NewAddress(driver);
-//        createSuccessAddressPage = new CreateSuccessAddress(driver);
-//        editAddressPage = new EditAddress(driver);
-//        updateSuccessAddressPage = new UpdateSuccessAddress(driver);
+        newEditAddressPage = new NewEditAddress();
+        showAddressPage = new ShowAddress();
+    }
+    @AfterClass
+    public static void tearDown(){
+        topMenu.clickSignOutBtn();
+        assertTrue(signInPage.isSignInPage());
+        Log.info("Выход из учетной записи выполнен");
     }
 
     @Test
@@ -45,102 +54,82 @@ public class SummaryTest {
         assertTrue(signInPage.isSignInPage());
 
 
-
         signInPage.setEmailField(ConfProperties.getProperty("email"));
         signInPage.setPassField(ConfProperties.getProperty("password"));
         signInPage.clickSignInBtn();
-//
-//
-//        welcomePage.initFieldsWelcomePage();
-//        assertTrue(welcomePage.isWelcomePage());
-//        Log.info("Вход в аккаунт выполнен");
-//
-//        welcomePage.clickWelcomeBtn();
-//
-//        addressesPage.initFieldAddressesPage();
-//        assertTrue(addressesPage.isAddressesPage());
-//        Log.info("Переход на страницу с таблицей адресов выполнен");
-//
-//        addressesPage.clickNewAddressBtn();
-//
-//        newAddressPage.initFieldNewAddressPage();
-//        assertTrue(newAddressPage.isNewAddressPage());
-//        Log.info("Переход на страницу создания нового адреса выполнен");
-//
-//        newAddressPage.setFirstNameField(ConfProperties.getProperty("firstNameNewAddress"));
-//        newAddressPage.setLastNameField(ConfProperties.getProperty("lastNameNewAddress"));
-//        newAddressPage.setAddress1Field(ConfProperties.getProperty("address1NewAddress"));
-//        newAddressPage.setAddress2Field(ConfProperties.getProperty("address2NewAddress"));
-//        newAddressPage.setCityField(ConfProperties.getProperty("cityNewAddress"));
-//        newAddressPage.setStateSelect(ConfProperties.getProperty("stateValueNewAddress"));
-//        newAddressPage.setZipCodeField(ConfProperties.getProperty("zipCodeNewAddress"));
-//        newAddressPage.clickCountryUSRadioBtn();
-//        newAddressPage.setBirthdayCalendar(ConfProperties.getProperty("birthdayCalendarNewAddress"));
-//        newAddressPage.setAgeField(ConfProperties.getProperty("ageNewAddress"));
-//        newAddressPage.setWebsiteField(ConfProperties.getProperty("websiteNewAddress"));
-//        newAddressPage.setPhoneField(ConfProperties.getProperty("phoneNewAddress"));
-//        newAddressPage.clickInterestsDanceCheckBox();
-//        newAddressPage.setNoteFiled(ConfProperties.getProperty("noteNewAddress"));
-//        newAddressPage.clickCreateAddressBtn();
-//
-//
-//        createSuccessAddressPage.initFieldCreateSuccessAddress();
-//        assertTrue(createSuccessAddressPage.isCreateSuccessAddressPage());
-//        Log.info("Создание нового адреса выполнено");
-//        Log.info("Переход на страницу предварительного просмотра нового адреса выполнен");
-//
-//        createSuccessAddressPage.clickAddressesBtn();
-//
-//        addressesPage.initFieldAddressesPage();
-//        addressesPage.initFiledTableAddressesPage();
-//        assertTrue(addressesPage.isAddressesPage());
-//        Log.info("Переход на страницу с таблицей адресов выполнен");
-//
-//        addressesPage.clickEditLastEntryAddressBtn();
-//
-//        editAddressPage.initFieldCreateAddressPage();
-//        assertTrue(editAddressPage.isEditAddressPage());
-//        Log.info("Переход на страницу редактирования адреса выполнен");
-//
-//        editAddressPage.clearFirstNameField();
-//        editAddressPage.setFirstNameField(ConfProperties.getProperty("firstNameEditAddress"));
-//        editAddressPage.clearLastNameField();
-//        editAddressPage.setLastNameField(ConfProperties.getProperty("lastNameEditAddress"));
-//        editAddressPage.clearAddress1Field();
-//        editAddressPage.setAddress1Field(ConfProperties.getProperty("address1EditAddress"));
-//        editAddressPage.clearAddress2Field();
-//        editAddressPage.setAddress2Field(ConfProperties.getProperty("address2EditAddress"));
-//        editAddressPage.clearCityField();
-//        editAddressPage.setCityField(ConfProperties.getProperty("cityEditAddress"));
-//        editAddressPage.clickUpdateAddressBtn();
-//
-//
-//        updateSuccessAddressPage.initFieldUpdateSuccessAddress();
-//        assertTrue(updateSuccessAddressPage.isUpdateSuccessAddressPage());
-//        Log.info("Редактирование адреса выполнено");
-//        Log.info("Переход на страницу предварительного просмотра отредактированного адреса выполнен");
-//
-//        updateSuccessAddressPage.clickAddressesBtn();
-//
-//
-//        addressesPage.initFieldAddressesPage();
-//        addressesPage.initFiledTableAddressesPage();
-//        assertTrue(addressesPage.isAddressesPage());
-//        Log.info("Переход на страницу с таблицей адресов выполнен");
-//
-//        addressesPage.clickDestroyLastEntryAddressBtn();
-//        Log.info("Удаление записи в талице адресов выполнено");
-//
-//        driver.switchTo().alert().accept();
 
-    }
 
-    @AfterClass
-    public static void tearDown(){
-//        addressesPage.initFieldAddressesPage();
-//        addressesPage.initFiledTableAddressesPage();
-//        addressesPage.clickSignOutBtn();
-//        Log.info("Выход из учетной записи выполнен");
-//        driver.quit();
+        assertTrue(homePage.isHomePage());
+        Log.info("Вход в аккаунт выполнен");
+
+        topMenu.clickAddressBtn();
+
+        assertTrue(addressesPage.isAddressesPage());
+        Log.info("Переход на страницу с таблицей адресов выполнен");
+
+        addressesPage.clickNewAddressBtn();
+
+        assertTrue(newEditAddressPage.isNewAddressPage());
+        Log.info("Переход на страницу создания нового адреса выполнен");
+
+        newEditAddressPage.setFirstNameField(ConfProperties.getProperty("firstNameNewAddress"));
+        newEditAddressPage.setLastNameField(ConfProperties.getProperty("lastNameNewAddress"));
+        newEditAddressPage.setAddress1Field(ConfProperties.getProperty("address1NewAddress"));
+        newEditAddressPage.setAddress2Field(ConfProperties.getProperty("address2NewAddress"));
+        newEditAddressPage.setCityField(ConfProperties.getProperty("cityNewAddress"));
+        newEditAddressPage.setStateSelect(ConfProperties.getProperty("stateValueNewAddress"));
+        newEditAddressPage.setZipCodeField(ConfProperties.getProperty("zipCodeNewAddress"));
+        newEditAddressPage.clickCountryUSRadioBtn();
+        newEditAddressPage.setBirthdayCalendar(ConfProperties.getProperty("birthdayCalendarNewAddress"));
+        newEditAddressPage.setAgeField(ConfProperties.getProperty("ageNewAddress"));
+        newEditAddressPage.setWebsiteField(ConfProperties.getProperty("websiteNewAddress"));
+        newEditAddressPage.setPhoneField(ConfProperties.getProperty("phoneNewAddress"));
+        newEditAddressPage.clickInterestsDanceCheckBox();
+        newEditAddressPage.setNoteFiled(ConfProperties.getProperty("noteNewAddress"));
+        newEditAddressPage.clickSubmitAddressBtn();
+
+        assertTrue(showAddressPage.isCreateSuccessAddressPage());
+        Log.info("Создание нового адреса выполнено");
+        Log.info("Переход на страницу предварительного просмотра нового адреса выполнен");
+
+        topMenu.clickAddressBtn();
+
+        assertTrue(addressesPage.isAddressesPage());
+        Log.info("Переход на страницу с таблицей адресов выполнен");
+
+        addressesPage.clickEditLastEntryAddressBtn();
+
+        assertTrue(newEditAddressPage.isEditAddressPage());
+        Log.info("Переход на страницу редактирования адреса выполнен");
+
+        newEditAddressPage.clearFirstNameField();
+        newEditAddressPage.setFirstNameField(ConfProperties.getProperty("firstNameEditAddress"));
+        newEditAddressPage.clearLastNameField();
+        newEditAddressPage.setLastNameField(ConfProperties.getProperty("lastNameEditAddress"));
+        newEditAddressPage.clearAddress1Field();
+        newEditAddressPage.setAddress1Field(ConfProperties.getProperty("address1EditAddress"));
+        newEditAddressPage.clearAddress2Field();
+        newEditAddressPage.setAddress2Field(ConfProperties.getProperty("address2EditAddress"));
+        newEditAddressPage.clearCityField();
+        newEditAddressPage.setCityField(ConfProperties.getProperty("cityEditAddress"));
+        newEditAddressPage.clickSubmitAddressBtn();
+
+
+        assertTrue(showAddressPage.isUpdateSuccessAddressPage());
+        Log.info("Редактирование адреса выполнено");
+        Log.info("Переход на страницу предварительного просмотра отредактированного адреса выполнен");
+
+        topMenu.clickAddressBtn();
+
+
+        assertTrue(addressesPage.isAddressesPage());
+        Log.info("Переход на страницу с таблицей адресов выполнен");
+
+        addressesPage.clickDestroyLastEntryAddressBtn();
+
+        driver.switchTo().alert().accept();
+        assertTrue(addressesPage.isAddressDestroy());
+        Log.info("Удаление записи в талице адресов выполнено");
+
     }
 }

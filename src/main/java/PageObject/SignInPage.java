@@ -1,8 +1,6 @@
 package PageObject;
 
 import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import utils.ConfProperties;
 
 import static com.codeborne.selenide.Condition.text;
@@ -28,6 +26,8 @@ public class SignInPage {
 
     public boolean isSignInPage(){
         boolean result = false;
+
+        markerSignInPage.shouldHave(text(ConfProperties.getProperty("sign_in_page_marker")));
 
         if(markerSignInPage.text().equals(ConfProperties.getProperty("sign_in_page_marker"))){
             result = true;
