@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 
-public class NewEditAddress {
+public class NewEditAddressPage {
 
     private SelenideElement markerNewEditAddressPage = $(byXpath("//div[@class='container']/h2"));
     private SelenideElement firstNameField = $(byXpath("//input[@id='address_first_name']"));

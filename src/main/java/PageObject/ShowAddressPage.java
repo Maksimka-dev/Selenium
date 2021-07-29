@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 
-public class ShowAddress {
+public class ShowAddressPage {
 
     private  SelenideElement markerCreateUpdateSuccessAddress = $(byXpath("//div[@data-test='notice']"));
 

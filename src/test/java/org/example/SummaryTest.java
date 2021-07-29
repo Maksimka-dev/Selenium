@@ -3,8 +3,6 @@ package org.example;
 import PageElement.TopMenu;
 import PageObject.*;
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Driver;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -25,9 +23,9 @@ public class SummaryTest {
     public static TopMenu topMenu;
     public static HomePage homePage;
     public static AddressesPage addressesPage;
-    public static NewEditAddress newEditAddressPage;
-    public static ShowAddress showAddressPage;
-    public static NewEditAddress editCreateAddressPage;
+    public static NewEditAddressPage newEditAddressPage;
+    public static ShowAddressPage showAddressPage;
+    public static NewEditAddressPage editCreateAddressPage;
 
     @BeforeClass
     public static void setup() {
@@ -38,8 +36,8 @@ public class SummaryTest {
         topMenu = new TopMenu();
         homePage = new HomePage();
         addressesPage = new AddressesPage();
-        newEditAddressPage = new NewEditAddress();
-        showAddressPage = new ShowAddress();
+        newEditAddressPage = new NewEditAddressPage();
+        showAddressPage = new ShowAddressPage();
     }
     @AfterClass
     public static void tearDown(){
